@@ -1,0 +1,5 @@
+homepage: "https://becompliance.com"
+documentation: "https://testegoogle.becompliance.com/lgpd/cookies/public-info/google-consent-mode"
+versions:
+  - sha: "0000000000000000000000000000000000000000"
+  - changeNotes: "Initial release of Be.Aliant CMP template for Google Consent Mode v2."

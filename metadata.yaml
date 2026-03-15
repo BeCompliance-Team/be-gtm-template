@@ -1,5 +1,6 @@
 homepage: "https://becompliance.com"
-documentation: "https://github.com/BeCompliance-Team/be-gtm-template/blob/main/README.md"
+documentation: "https://github.com/BeCompliance-Team/be-gtm-template#be-gtm-template"
 versions:
-  - sha: "9d8fb78a99554d87413105dfbfc7710efebd3534"
-    changeNotes: "Initial release of Be.Aliant CMP template for Google Consent Mode v2."
+  # Latest version
+  - sha: 9d8fb78a99554d87413105dfbfc7710efebd3534
+    changeNotes: Initial release;

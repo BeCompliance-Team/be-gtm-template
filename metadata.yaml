@@ -2,5 +2,5 @@ homepage: "https://becompliance.com"
 documentation: "https://github.com/BeCompliance-Team/be-gtm-template#be-gtm-template"
 versions:
   # Latest version
-  - sha: 9d8fb78a99554d87413105dfbfc7710efebd3534
+  - sha: 7e012eb2cd9ab3b1cf5225a3e5c5208651a22959
     changeNotes: Initial release;

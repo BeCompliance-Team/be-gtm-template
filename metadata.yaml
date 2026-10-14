@@ -2,5 +2,13 @@ homepage: "https://cookies.becompliance.com"
 documentation: "https://cookies.becompliance.com/installation.html"
 versions:
   # Latest version
+  - sha: b1571b543da9ebec81a79df9531d8a351c2737fd
+    changeNotes: >-
+      Declares the Be Compliance developer id to Google through gtagSet, regardless
+      of the Consent Mode checkbox. Encodes each segment of the client id with
+      encodeUriComponent when building the script URL, and rejects values outside
+      the {company}/{banner} format without publishing any consent state. Emits
+      url_passthrough and ads_data_redaction as separate set commands, before the
+      default. An invalid region row is ignored instead of becoming a global default.;
   - sha: aa1aa5786fadb620d31fa4e3fce48a371cf93300
     changeNotes: Initial release;

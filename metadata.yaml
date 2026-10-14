@@ -2,6 +2,10 @@ homepage: "https://cookies.becompliance.com"
 documentation: "https://cookies.becompliance.com/installation.html"
 versions:
   # Latest version
+  - sha: 86a86ab294782c979e77b412e8a283960161b0be
+    changeNotes: >-
+      Keeps the Be.Aliant display name used in the gallery. Includes every change of
+      the previous version (developer id, client id encoding and validation).;
   - sha: b1571b543da9ebec81a79df9531d8a351c2737fd
     changeNotes: >-
       Declares the Be Compliance developer id to Google through gtagSet, regardless

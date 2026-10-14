@@ -26,7 +26,7 @@ To ensure a secure integration with no data leakage, use our official template:
 ## 2. Creating and Configuring the Tag
 1. Go to the **Tags** menu and click **New**.
 2. Click **Tag Configuration** and select the **Be.Aliant** custom template you just added.
-3. Fill in the **BeCompliance Banner ID (Client ID)** field with your unique alphanumeric code (available in your Be.Aliant dashboard).
+3. Fill in the **BeCompliance Banner ID (Client ID)** field. In your Be.Aliant dashboard, open the banner and use the **Copy** button on the **"ID para configuração no GTM"** field — the value already comes in the `{company}/{banner}` format required here (e.g. `1234/a1b2c3d4-0000-4000-8000-000000000000`). Values outside this format are rejected and nothing is loaded.
 
 ## 3. Choosing the Operation Mode (Basic vs. Advanced Mode)
 Google Consent Mode v2 can operate in two distinct modes. Our template allows you to choose the best approach for your business through the **"Enable Google Consent Mode v2 (Recommended)"** checkbox.
@@ -59,7 +59,7 @@ After publishing, use GTM's **Preview** mode. The Be.Aliant template will output
 
 ## ⚙️ Configuration Fields
 
-* **Client ID (Required):** Your unique alphanumeric identifier. Example: `ae3e2166-c2c3-4726-848a-1d28fb5ab1a7`.
+* **Client ID (Required):** Your banner identifier in the `{company}/{banner}` format. Example: `1234/a1b2c3d4-0000-4000-8000-000000000000`.
 
 ## 📚 Documentation & Support
 

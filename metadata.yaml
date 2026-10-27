@@ -2,6 +2,13 @@ homepage: "https://cookies.becompliance.com"
 documentation: "https://cookies.becompliance.com/installation.html"
 versions:
   # Latest version
+  - sha: edda4cb3ebef55676d85a8d3f47b2dd834929d92
+    changeNotes: >-
+      Fixes the Consent Mode flow: the template no longer writes the
+      __beCmpBootstrap global. The GTM sandbox blocked that write and stopped the
+      tag before the CMP script was injected. The CMP script does not read that
+      flag, so nothing else changes, and the template no longer requests access
+      to globals.;
   - sha: 86a86ab294782c979e77b412e8a283960161b0be
     changeNotes: >-
       Keeps the Be.Aliant display name used in the gallery. Includes every change of

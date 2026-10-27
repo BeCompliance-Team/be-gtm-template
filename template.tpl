@@ -207,7 +207,6 @@ const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const logToConsole = require('logToConsole');
 const gtagSet = require('gtagSet');
-const setInWindow = require('setInWindow');
 const encodeUriComponent = require('encodeUriComponent');
 
 
@@ -299,9 +298,6 @@ if (data.enableConsentMode !== false) {
       'wait_for_update': 500
     });
   }
-
-
-  setInWindow('__beCmpBootstrap', true, true);
 }
 
 
@@ -389,67 +385,6 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "developer_id.dZjFmMW"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "access_globals",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "keys",
-          "value": {
-            "type": 2,
-            "listItem": [
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "__beCmpBootstrap"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": false
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": false
-                  }
-                ]
               }
             ]
           }
@@ -852,29 +787,11 @@ scenarios:
 
     assertThat(estado.region).isUndefined();
     assertThat(estado.ad_storage).isEqualTo('denied');
-- name: Com o Consent Mode ligado o bundle e avisado que o default ja saiu
-  code: |-
-    // Sem esta marca o bundle republica o default quando termina de carregar,
-    // depois de as tags ja terem disparado — duas fontes de verdade para o mesmo
-    // estado. E o mesmo flag que o bootstrap inject.js usa na instalacao manual.
-    const mockData = {
-      clientId: '390/abc',
-      enableConsentMode: true,
-      defaultSettings: []
-    };
-
-    mock('queryPermission', () => true);
-    mock('injectScript', (url, onSuccess) => { onSuccess(); });
-
-    runCode(mockData);
-
-    assertApi('setInWindow').wasCalledWith('__beCmpBootstrap', true, true);
 - name: Com o Consent Mode desligado nada e publicado, mas a CMP se identifica
   code: |-
     // Basic Mode: o cliente assume o bloqueio das tags pelos consent checks do
-    // GTM. Marcar o flag aqui silenciaria tambem o default do bundle, deixando o
-    // site sem nenhum estado publicado. O developer id e a excecao: identifica a
-    // CMP certificada ao Google e nao depende dessa opcao.
+    // GTM e o template nao publica estado nenhum. O developer id e a excecao:
+    // identifica a CMP certificada ao Google e nao depende dessa opcao.
     const mockData = {
       clientId: '390/abc',
       enableConsentMode: false,
@@ -889,7 +806,6 @@ scenarios:
     runCode(mockData);
 
     assertApi('setDefaultConsentState').wasNotCalled();
-    assertApi('setInWindow').wasNotCalled();
     assertThat(comandos.length).isEqualTo(1);
     assertThat(comandos[0]).isEqualTo('developer_id.dZjFmMW');
 - name: A URL do bundle usa o ID como o painel entrega
@@ -970,9 +886,8 @@ scenarios:
 - name: ID fora do formato nao publica consentimento negado sem CMP
   code: |-
     // A validacao de formato roda antes do Consent Mode. Rodando depois, o
-    // default negado e o flag __beCmpBootstrap ficariam publicados sem nenhuma
-    // CMP carregada: o visitante nunca ve o banner e as tags do Google ficam
-    // negadas para sempre.
+    // default negado ficaria publicado sem nenhuma CMP carregada: o visitante
+    // nunca ve o banner e as tags do Google ficam negadas para sempre.
     const mockData = {
       clientId: 'somente-um-segmento',
       enableConsentMode: true,
@@ -985,7 +900,6 @@ scenarios:
     runCode(mockData);
 
     assertApi('setDefaultConsentState').wasNotCalled();
-    assertApi('setInWindow').wasNotCalled();
     assertApi('gtagSet').wasNotCalled();
     assertApi('injectScript').wasNotCalled();
     assertApi('gtmOnFailure').wasCalled();
